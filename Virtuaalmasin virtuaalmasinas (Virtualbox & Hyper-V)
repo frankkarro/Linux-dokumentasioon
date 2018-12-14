@@ -1,0 +1,25 @@
+Virtuaalmasin virtuaalmasinas (Virtualbox & Hyper-V)
+
+Win10 pro
+2 tuuma
+4gb ram
+50 gb ketas
+CPU allow wirtualization.
+
+Installin virtuaalsesse win10 virtualboxi. 
+Loon uue masina ubuntu jaoks.
+2tuuma
+1gb ram
+8gb ketas
+
+Käivitan masina ning host ehk win10 teeb restardi ning virtualiseerimine ei tööta.
+
+
+Hyper-V
+samad parameetrid hostil
+
+manage, add roles and features, hyper v, hyper v network setup, + adapter.
+Installin ära. 
+
+Käivitan hyperV manageri alt uue masina ubuntu isoga.
+Masin lihtsalt ei hakka tööle.
