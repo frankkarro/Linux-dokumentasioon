@@ -1,0 +1,44 @@
+
+POSTFIX DOC
+###installin apache2 ja php5
+$ sudo apt-get update
+$ sudo apt-get install apache2 php5
+
+###installin postfix meiliserveri
+$ sudo apt-get install postfix
+-ok -interne site -FQDN nimi
+$ sudo service postfix restart
+
+###installin dovecot mail delivery agent
+$ sudo apt-get install dovecot-imapd dovecot-pop3d
+-yes -hostname
+$ sudo service dovecot restart
+
+###installin quirrelmaili tööriista, millega hallatakse meile ja kuvatakse veebliidest
+$ sudo apt-get install squirrelmail
+$ sudo squirrelmail-configure
+-server settings -domain -main menu - general -allow server-side sorting TRUE -save
+
+###kopeerin squirreli confi faili apachese, et pääseda ligi veebile
+$ sudo cp /etc/squirrelmail/apache.conf /etc/apache2/sites-available/squirrelmail.conf
+$ sudo a2ensite squirrelmail.conf
+
+###Meilikasutajate loomine
+$ sudo useradd kasutajanimi
+$ sudo passwd kasutajanimi
+$ sudo mkdir -p /var/www/html/kasutajanimi
+$ usermod -m -d /var/www/html/kasutajanimi kasutajanimi
+$ sudo chown -R myusername:myusername /var/www/html/myusername
+
+###Proovi siseneda liidesele ja saata meil teisele kasutajale
+
+Käideldavuse tagamiseks keelan masinas
+-root by ssh, no automatic updates, ufw, only auth by ssh (selleks et keegi meie masinat maha ei saaks võta)
+-backup / snapshotid
+
+Terviklikkus
+-Ei lase kellegil suvalisel oma serverit hallata
+-Kui vaja serveriga suhelda siis see käib üle  vpn ja port 443 (80 keelatud)
+
+Konfidentsiaalsus
+-kasutajate / rakenduste andmekaustad on krüpteeritud ja krüpteeriud kujul ka varundatud.
