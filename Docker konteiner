@@ -1,0 +1,57 @@
+DOCKER CONTAINER PAIGALDUS
+
+###uuendan repod ära
+$ sudo apt-get update
+
+###lisan rakendused et lubada aptil kasutada reposid üle httpsi
+$ sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+
+###lisan dockeri gpg võtme
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+###olen kindel et fingerprint oleks usaldusväärne
+$ sudo apt-key fingerprint 0EBFCD88
+
+###lisan dockeri reposiooriumi
+$ sudo add-apt-repository \
+"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) \
+stable"
+
+###uuendan repod ja paigaldan dockeri
+$ sudo apt-get update
+$ sudo apt-get install docker-ce
+
+###kontrollin kas docker töötab
+$ sudo docker run hello-world
+
+###loon konteineri
+$sudo docker run -dit --name webserver -p 8080:80 -v /home/user/website/:/usr/local/apache2/htdocs/ httpd:2.4
+
+###teen veelbilehe sisu
+nano /home/frank/website/docker.html
+
+<html>
+<p>töötab</p>
+</html>
+
+
+
+###192.168.1.10:8080 ja veebliehe sisu avaneb
+
+--------------------------------------------------------------------------------------------------------------------------------------
+Käideldavuse tagamiseks keelan masinas
+-root by ssh, no automatic updates, ufw, only auth by ssh (selleks et keegi meie masinat maha ei saaks võta)
+-backup / snapshotid
+
+Terviklikkus
+-Ei lase kellegil suvalisel oma serverit hallata
+-Kui vaja serveriga suhelda siis see käib üle  vpn ja port 443 (80 keelatud)
+
+Konfidentsiaalsus
+-kasutajate / rakenduste andmekaustad on krüpteeritud ja krüpteeriud kujul ka varundatud.
+
