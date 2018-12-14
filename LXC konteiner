@@ -1,0 +1,51 @@
+LXC KONTEINER
+
+###paigaldame lxc ja sillautiilid
+$sudo nano apt-get install lxc bridge-utils
+
+###tekitame network silla, millega ühendada konteinerid
+$sudo nano /etc/network/interfaces
+  auto lo
+  iface lo inet loopback
+  
+  auto br-lan
+  iface br-lan inet dhcp
+  bridge_ports eth0
+  
+###muudame lxc konfi järgnevalt
+$sudo nano /etc/lxc/default.conf
+  lxc.network.type=veth
+  lxc.network.flags=up
+  lxc.network.link=br-lan
+  lxc.network.hwaddr=00:16:3e:xx:xx:xx
+
+###Konteineri loomine ja kasutamine
+$sudo lxc-creae -t download containername -- -d ubuntu -r trusty -a amd64
+
+####käivita konteiner
+$lxc-start -d -n containername
+
+###konteineri ruudu käsjada
+$lxc-attach -n conainername
+
+###konteinerite nimekiri
+$sudo lxc-ls-f
+
+###konteineri seiskamine
+$lxc-stop –n konteineri nimi
+
+###konteineri kustutamine
+$lxc-destroy -n konteineri nimi
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+Käideldavuse tagamiseks keelan masinas
+-root by ssh, no automatic updates, ufw, only auth by ssh (selleks et keegi meie masinat maha ei saaks võta)
+-backup / snapshotid
+
+Terviklikkus
+-Ei lase kellegil suvalisel oma serverit hallata
+-Kui vaja serveriga suhelda siis see käib üle  vpn ja port 443 (80 keelatud)
+
+Konfidentsiaalsus
+-kasutajate / rakenduste andmekaustad on krüpteeritud ja krüpteeriud kujul ka varundatud.
