@@ -1,4 +1,3 @@
-
 POSTFIX DOC
 ###installin apache2 ja php5
 $ sudo apt-get update
@@ -31,6 +30,8 @@ $ usermod -m -d /var/www/html/kasutajanimi kasutajanimi
 $ sudo chown -R myusername:myusername /var/www/html/myusername
 
 ###Proovi siseneda liidesele ja saata meil teisele kasutajale
+
+--------------------------------------------------------------------------------------------------------------------------------------
 
 Käideldavuse tagamiseks keelan masinas
 -root by ssh, no automatic updates, ufw, only auth by ssh (selleks et keegi meie masinat maha ei saaks võta)
